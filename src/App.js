@@ -1,10 +1,15 @@
 import './App.css';
+import Navbar from './Components/Navbar';
+import MainCard from './Components/IntroPage/MainCard';
+import Footer from './Components/Footer';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello World !!!</h1>
-    </div>
+    <>
+      <Navbar/>
+      <MainCard/>
+      <Footer/>
+    </>
   );
 }
 
