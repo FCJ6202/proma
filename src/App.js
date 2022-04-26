@@ -2,7 +2,7 @@ import './App.css';
 import Navbar from './Components/Navbar';
 import MainCard from './Components/IntroPage/MainCard';
 import Footer from './Components/Footer';
-import HomePage from "./pages/homepage/homepage.component.jsx"
+import Home from './Components/Home/Home';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.components';
 import {Routes,Route} from 'react-router-dom'
 import SignUp from './pages/sign-up/sign-up.components';
