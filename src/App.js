@@ -6,6 +6,10 @@ import HomePage from "./pages/homepage/homepage.component.jsx"
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.components';
 import {Routes,Route} from 'react-router-dom'
 import SignUp from './pages/sign-up/sign-up.components';
+import ClassView from './pages/class/class.component';
+import People from './Components/People/People.component';
+import Classwork from './Components/Classwork/Classwork.component';
+import Stream from './pages/streamPage/streamPage.component';
 const myInlineStyle={
   color:'black',
   fontSize:'40px',
@@ -31,8 +35,13 @@ function App() {
 
           <Route path="signIn" element={<SignInAndSignUpPage/>} />
           <Route path="signUp" element={<SignUp/>} />
+          <Route path="classView" element={<ClassView/>} />
+          <Route path="home" element={<HomePage/>} />
+          <Route path = "/class/:classId/people" element = {<People/>} />
+          <Route path = "/class/:classId/classwork" element = {<Classwork/>} />
+          <Route path = "/class/:classId/stream" element = {<Stream/>} />
           <Route path="*" element={<div style={myInlineStyle}>404 Page not found😶</div>} />
-      
+
       </Routes>
     
     </>
