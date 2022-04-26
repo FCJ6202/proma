@@ -7,7 +7,11 @@ import Home from './Components/Home/Home';
 function App() {
   return (
     <>
-    
+    <>
+    <Navbar/>
+    <Home/>
+    <Footer/>
+    </>
     </>
   );
 }
