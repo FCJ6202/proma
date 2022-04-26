@@ -1,4 +1,6 @@
 import React from 'react'
+import {Link } from "react-router-dom";
+import "./Navbar.css"
 
 export default function Navbar() {
     return (
@@ -15,14 +17,17 @@ export default function Navbar() {
                                 <a className="nav-link active" style={{marginRight : "20px"}}aria-current="page" href="#">Home</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" style={{marginRight : "20px"}} href="#">About</a>
+                                {/* <a className="nav-link" style={{marginRight : "20px"}} href="#">About</a> */}
+                                <div  className="nav-link div-link" style={{marginRight : "20px"}} onClick={(e) => {e.preventDefault(); window.location.replace('/#about');}}>About</div>
+
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Contact</a>
+                                <div  className="nav-link div-link" onClick={(e) => {e.preventDefault(); window.location.replace('/#contact');}}>Contact</div>
                             </li>
                         </ul>
                         <form className="d-flex">
-                            <button className="btn btn-outline-dark" type="link">Login/Signup</button>
+                        <Link to ="/signIn"> <button className="btn btn-outline-dark" type="link">Login/Signup</button></Link>
+                           
                         </form>
                     </div>
                 </div>
