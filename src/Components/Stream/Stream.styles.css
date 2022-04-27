@@ -1,0 +1,31 @@
+
+.stream
+{
+    /* background-color: blanchedalmond; */
+    margin-left: 25%;
+    margin-right:25%;
+    /* height: 1000px; */
+}
+
+.class-header
+{
+    height: 300px;
+    width:auto;
+    background-color: blue;    
+    color: white;
+    padding: 5%;
+}
+.class-title
+{
+    font-size:500%;
+    font-family: Arial, sans-serif;
+    padding: 1%;
+}
+
+.class-description
+{
+    font-size:200%;
+    font-family: Arial, sans-serif;
+    padding: 2%;
+    
+}

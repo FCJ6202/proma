@@ -2,6 +2,8 @@ import React from "react"
 import "./sign-in.styles.css"
 import {Link } from "react-router-dom";
 import CustomButton from "../custom-button/custom-button.component";
+import { Navigate } from "react-router-dom";
+
 class SignIn extends React.Component
 {
 
@@ -10,13 +12,24 @@ class SignIn extends React.Component
         super(props);
         this.state={
             email:'',
-            password:''
+            password:'',
+            redirect:false
         }
     }
 
     handleSubmit =event => {
         event.preventDefault();
         this.setState({email:'',password:''})
+        
+        try {
+            //sign in code
+            this.setState({redirect:true});
+        }
+        catch
+        {
+            console.log("error signing in");
+        }
+    
     }
 
     handleChange =event =>
@@ -28,11 +41,11 @@ class SignIn extends React.Component
 
     render()
     {
-        
+        const {redirect} = this.state; 
         return(
            
            <div className="sign-in">
-               
+                {redirect && (<Navigate to="/Home" replace={true} />)}
                <div className="sign-in-and-sign-up">SIGN IN</div>
                <h2>I already have an account</h2>
                <div class="detail">

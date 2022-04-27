@@ -35,3 +35,7 @@ export default function Navbar() {
         </>
     )
 }
+{/* <p className="col-3 option nav-ham"><NavLink to = {`/class/${classInfo._id}`} className=" link">Stream</NavLink></p>
+<p className="col-3 option nav-ham"><NavLink to = {`/class/${classInfo._id}/classwork`} className="link">Classwork</NavLink></p>
+<p className="col-3 option nav-ham"><NavLink to = {`/class/${classInfo._id}/people`} className="link">People</NavLink></p>
+<p className="col-3 option nav-ham"><NavLink to = {`/class/${classInfo._id}/setting`} className ="link">Setting</NavLink></p> */}
