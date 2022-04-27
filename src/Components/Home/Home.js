@@ -8,33 +8,33 @@ export default function Home() {
         {
             Id : 1,
             RepoName: "Data Structure",
-            CreaterName: "O.P.Vyas"
+            CreatorName: "O.P.Vyas"
         },
         {
             Id : 2,
             RepoName: "Data Structure",
-            CreaterName: "O.P.Vyas"
+            CreatorName: "O.P.Vyas"
         },
         {
             Id : 3,
             RepoName: "Data Structure",
-            CreaterName: "O.P.Vyas"
+            CreatorName: "O.P.Vyas"
         },
         {
             Id : 4,
             RepoName: "Data Structure",
-            CreaterName: "O.P.Vyas"
+            CreatorName: "O.P.Vyas"
         },
         {
             Id : 5,
             RepoName: "Data Structure",
-            CreaterName: "O.P.Vyas"
+            CreatorName: "O.P.Vyas"
         },
     ]// DataBase hume ye object dega
     const [RepoDetails, setRepoDetails] = useState(FirstDetails); // ye Repo details hai particular user ka
     const [repo, setrepo] = useState({   // ye Individual repo hai jisme repo and creter ka naam jayega
         RepoName : "",
-        CreaterName : "",
+        CreatorName : "",
         Id : 0
     })
 
@@ -49,7 +49,7 @@ export default function Home() {
         //console.log(RepoDetails);
         setrepo({
             RepoName : "",
-            CreaterName : "",
+            CreatorName : "",
             Id : 0
         })
         close.current.click();
@@ -77,7 +77,7 @@ export default function Home() {
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="exampleInputCreater" className="form-label">Creater Name</label>
-                                <input type="text" className="form-control" required value={repo.CreaterName} onChange={Handle} id="CreaterName" />
+                                <input type="text" className="form-control" required value={repo.CreatorName} onChange={Handle} id="CreatorName" />
                             </div>
                         </div>
                         <div className="modal-footer">
@@ -94,7 +94,7 @@ export default function Home() {
                     {RepoDetails.map((data) => {
                         return (
                             <div className="col-md-4 my-3" key={data.Id}>
-                                <Repo RepoName={data.RepoName} CreaterName={data.CreaterName} />
+                                <Repo RepoName={data.RepoName} CreatorName={data.CreatorName} RepoId={data.Id}/>
                             </div>
                         )
                     })}
@@ -105,7 +105,7 @@ export default function Home() {
                     {RepoDetails.map((data) => {
                         return (
                             <div className="col-md-4 my-3" key={data.Id}>
-                                <Repo RepoName={data.RepoName} CreaterName={data.CreaterName} />
+                                <Repo RepoName={data.RepoName} CreatorName={data.CreatorName} RepoId={data.Id}/>
                             </div>
                         )
                     })}

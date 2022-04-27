@@ -1,0 +1,62 @@
+{
+    "repositories":
+    {
+        "OOP":{
+            "id": "1",
+            "name": "OOP",
+            "creatorName": "O.P.Vyas",
+            "section": "A",
+            "descriptionHeading": "Object Oriented Programming",
+            "description": "Project",
+            "room": "1",
+            "ownerId": "1",
+            "creationTime":"2020-01-01",
+            "updateTime":"2020-01-01",
+            "enrollmentCode": "ABCD",
+            "courseState": "PROVISIONED",
+            "alternateLink": "classroom.proma/qeoqone",
+            "teacherGroupEmail": "string",
+            "courseGroupEmail": "string",
+            "courseImage":"1"
+          },
+          "SE":{
+            "id": "2",
+            "name": "SE",
+            "creatorName": "O.P.Vyas",
+            "section": "A",
+            "descriptionHeading": "Object Oriented Programming",
+            "description": "Project",
+            "room": "1",
+            "ownerId": "1",
+            "creationTime":"2020-01-01",
+            "updateTime":"2020-01-01",
+            "enrollmentCode": "ABCD",
+            "courseState": "PROVISIONED",
+            "alternateLink": "classroom.proma/qeoqone",
+            "teacherGroupEmail": "string",
+            "courseGroupEmail": "string",
+            "courseImage":"2"
+          },
+          "DBMS":{
+            "id": "3",
+            "name": "DBMS",
+            "creatorName": "O.P.Vyas",
+            "section": "A",
+            "descriptionHeading": "Object Oriented Programming",
+            "description": "Project",
+            "room": "1",
+            "ownerId": "1",
+            "creationTime":"2020-01-01",
+            "updateTime":"2020-01-01",
+            "enrollmentCode": "ABCD",
+            "courseState": "PROVISIONED",
+            "alternateLink": "classroom.proma/qeoqone",
+            "teacherGroupEmail": "string",
+            "courseGroupEmail": "string",
+            "courseImage":"3"
+
+          }
+    }
+
+      
+}
