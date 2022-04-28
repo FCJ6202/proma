@@ -10,7 +10,6 @@ import ClassView from './pages/class/class.component';
 import People from './Components/People/People.component';
 import Classwork from './Components/Classwork/Classwork.component';
 import Stream from './Components/Stream/Stream.component_mod';
-import Announcement from './Components/Announcement/Announcement.componenet';
 import Assignment from './Components/Assignment/Assignment.component';
 const myInlineStyle={
   color:'black',
@@ -41,9 +40,9 @@ function App() {
           <Route path="class/:classId" element={<ClassView/>}>
               <Route path = "/class/:classId/people" element = {<People/>} />
               <Route path = "/class/:classId/classwork" element = {<Classwork/>} />
-              <Route path = "/class/:classId/stream" element = {<Stream/>} >
+              <Route path = "/class/:classId/stream" element = {<Stream/>} />
               <Route path="/class/:classId/stream/:postId/assignment" element={<Assignment/>}/>
-              </Route>
+          
           </Route>
           <Route path="*" element={<div style={myInlineStyle}>404 Page not found😶</div>} />
 

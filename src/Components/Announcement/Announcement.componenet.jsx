@@ -3,10 +3,10 @@ import React from 'react'
 import image from "../../images/profile_pic.png"
 import { Link } from 'react-router-dom'
 
-const Announcement =(props) => {
+const Announcement =({id,...props}) => {
   console.log(props.type)
   const newTo = { 
-    pathname: `/class/:${props.courseId}/stream/:${props.id}/assignment`, 
+    pathname: `/class/:${props.courseId}/stream/:${id}/assignment`, 
   };
 
     return (

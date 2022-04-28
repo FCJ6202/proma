@@ -1,9 +1,8 @@
 import './Stream.styles.css'
 import React from 'react'
 import { useState,useEffect } from 'react'
-import { Outlet, useParams } from 'react-router-dom'
+import {useParams } from 'react-router-dom'
 import Announcement from '../Announcement/Announcement.componenet'
-import Assignment from '../Assignment/Assignment.component'
 const Stream = () => {
     const params=useParams();
     const classId=params.classId;
@@ -127,7 +126,7 @@ const Stream = () => {
         const arr=[]
         const getClassPosts = () =>
         {
-            ClassPosts.forEach( (data) => {
+            ClassPosts.map( (data) => {
                 if(data.courseId===classId)
                 {
                     arr.push(data);
@@ -136,12 +135,12 @@ const Stream = () => {
         }
          getClassPosts();
          updateCurrentClassPosts(arr);
+        //  console.log(CurrentClassPosts);
       },[]);
-      
     return(
     
     <>  
-           {console.log(CurrentClassPosts)}
+           {/* {console.log(CurrentClassPosts)} */}
 
         <div className='stream'>
             <div className='class-header'>
@@ -156,7 +155,7 @@ const Stream = () => {
             
                     (CurrentClassPosts)?.map( ({id,...otherProps}) => 
                     {
-                        return  <><Announcement key={id} {...otherProps}/></>
+                        return  <><Announcement key={id} id={id} {...otherProps}/></>
                     }  
                     )
                     
