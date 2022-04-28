@@ -7,17 +7,17 @@ export default function Home() {
     const FirstDetails = [
         {
             Id : 1,
-            RepoName: "Data Structure",
+            RepoName: "OOP",
             CreatorName: "O.P.Vyas"
         },
         {
             Id : 2,
-            RepoName: "Data Structure",
+            RepoName: "SE",
             CreatorName: "O.P.Vyas"
         },
         {
             Id : 3,
-            RepoName: "Data Structure",
+            RepoName: "DBMS",
             CreatorName: "O.P.Vyas"
         },
         {
@@ -27,7 +27,7 @@ export default function Home() {
         },
         {
             Id : 5,
-            RepoName: "Data Structure",
+            RepoName: "PPL",
             CreatorName: "O.P.Vyas"
         },
     ]// DataBase hume ye object dega
