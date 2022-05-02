@@ -61,9 +61,45 @@ const Stream = () => {
                 "teacherGroupEmail": "string",
                 "courseGroupEmail": "string",
                 "courseImage":"3"
+              },
+              {
+                "id": "4",
+                "name": "Data Structure",
+                "creatorName": "O.P.Vyas",
+                "section": "A",
+                "descriptionHeading": "Object Oriented Programming",
+                "description": "Project",
+                "room": "1",
+                "ownerId": "1",
+                "creationTime":"2020-01-01",
+                "updateTime":"2020-01-01",
+                "enrollmentCode": "ABCD",
+                "courseState": "PROVISIONED",
+                "alternateLink": "classroom.proma/qeoqone",
+                "teacherGroupEmail": "string",
+                "courseGroupEmail": "string",
+                "courseImage":"3"
+              },
+              {
+                "id": "5",
+                "name": "PPL",
+                "creatorName": "O.P.Vyas",
+                "section": "A",
+                "descriptionHeading": "Object Oriented Programming",
+                "description": "Project",
+                "room": "1",
+                "ownerId": "1",
+                "creationTime":"2020-01-01",
+                "updateTime":"2020-01-01",
+                "enrollmentCode": "ABCD",
+                "courseState": "PROVISIONED",
+                "alternateLink": "classroom.proma/qeoqone",
+                "teacherGroupEmail": "string",
+                "courseGroupEmail": "string",
+                "courseImage":"3"
               }
         ]
-            const StreamAnnouncementArray= 
+        const StreamAnnouncementArray= 
             [
                     {
                         "courseId": "1",
@@ -101,7 +137,7 @@ const Stream = () => {
                         "type":"announcement",
                         "alternateLink": "classroom.proma/qeoqone",
                       },
-                    ]
+        ]
     // console.log(classId)
     const [CurrentClassInfo,setCurrentClassInfo]=useState({});
     const [CurrentClassPosts,updateCurrentClassPosts]=useState([]);
