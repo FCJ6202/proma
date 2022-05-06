@@ -6,6 +6,7 @@ import Announcement from '../Announcement/Announcement.componenet'
 const Stream = () => {
     const params=useParams();
     const classId=params.classId;
+    console.log(classId)
         const ClassInfoArray= 
         [
             {
@@ -155,7 +156,7 @@ const Stream = () => {
             
                     (CurrentClassPosts)?.map( ({id,...otherProps}) => 
                     {
-                        return  <><Announcement key={id} id={id} {...otherProps}/></>
+                        return  <Announcement key={id} id={id} {...otherProps}/>
                     }  
                     )
                     

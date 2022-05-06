@@ -20,7 +20,7 @@ export default function ClassNavbar(props) {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to={`/class/${classId}/stream`}>
+                                <Link to={`/class/${classId}`}>
                                 <div className="nav-link active" style={{marginRight : "20px"}}aria-current="page" >Stream</div>
                                 </Link>
                             </li>

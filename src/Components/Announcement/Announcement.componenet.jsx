@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 const Announcement =({id,...props}) => {
   console.log(props.type)
   const newTo = { 
-    pathname: `/class/:${props.courseId}/stream/:${id}/assignment`, 
+    pathname: `/class/${props.courseId}/stream/${id}/assignment`, 
   };
 
     return (

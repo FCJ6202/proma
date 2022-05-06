@@ -40,10 +40,12 @@ function App() {
           <Route path="class/:classId" element={<ClassView/>}>
               <Route path = "/class/:classId/people" element = {<People/>} />
               <Route path = "/class/:classId/classwork" element = {<Classwork/>} />
-              <Route path = "/class/:classId/stream" element = {<Stream/>} />
+              <Route path = "/class/:classId/" element = {<Stream/>} />
               <Route path="/class/:classId/stream/:postId/assignment" element={<Assignment/>}/>
           
           </Route>
+          
+
           <Route path="*" element={<div style={myInlineStyle}>404 Page not found😶</div>} />
 
       </Routes>
