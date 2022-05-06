@@ -17,8 +17,24 @@ const RepoSchema = new Schema({
         required : true
     },
 
-    joinedUserId : {
-        type : Object
+    Admin : {
+        type : Array,
+        default : []
+    },
+
+    Member : {
+        type : Array,
+        default : []
+    },
+
+    Annoucement : {
+        type : Array,
+        default : []
+    },
+
+    Assignment : {
+        type : Array,
+        default : []
     },
     
     date : {

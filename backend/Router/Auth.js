@@ -44,7 +44,7 @@ body('password', 'please enter atleast 4 length password').isLength({ min: 4 })]
     console.log(token);
   } catch (error) {
     console.log(error)
-    res.send({ success,error: error.message });
+    res.send({ error: error.message });
   }
 })
 
@@ -83,7 +83,7 @@ body('password', 'please enter atleast 4 length password').isLength({ min: 1 })]
 
   } catch (error) {
     console.log(error)
-    res.json({ success,error: error.message });
+    res.json({ error: error.message });
   }
 
 });
@@ -96,7 +96,7 @@ router.post('/userdata', fetchData, async (req, res) => {
       res.json(userData);
     } catch (error) {
       console.log(error)
-      res.json({success, error: error.message });
+      res.json({error: error.message });
     }
   })
 
