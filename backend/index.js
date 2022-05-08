@@ -11,6 +11,7 @@ app.use(express.json());
 
 app.use('/u/auth',require('./Router/Auth'));
 app.use('/u/repo',require('./Router/Repo'));
+app.use('/u/annouce',require('./Router/Annouce'));
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
