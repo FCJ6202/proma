@@ -1,7 +1,10 @@
 const express = require('express')
 const app = express()
+var cors = require('cors')
 const ConnectDatabase = require('./db');
 const port = 4000
+
+app.use(cors());
 
 ConnectDatabase();
 app.use(express.json());

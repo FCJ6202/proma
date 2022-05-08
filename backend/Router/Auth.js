@@ -83,7 +83,7 @@ body('password', 'please enter atleast 4 length password').isLength({ min: 1 })]
 
   } catch (error) {
     console.log(error)
-    res.json({ error: error.message });
+    res.json({ success : false,error: error.message });
   }
 
 });

@@ -15,7 +15,37 @@ class SignUp extends React.Component
          confirmPassword:'',
          redirect:false
      }
- }   
+ }
+ HandleSignup = async (UserData) => {
+    const name = UserData.displayname;
+    const email = UserData.email;
+    const password = UserData.password;
+    const url = "http://localhost:4000/u/auth/create";
+    const response = await fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+            'Content-Type': 'application/json',
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify({name, email, password }) // body data type must match "Content-Type" header
+    });
+    const json = await response.json();
+    if(json.success){
+        console.log(json);
+    }else{
+        alert("please enter valid credentials");
+    }
+    return json;
+}
+
+Default = () => {
+    this.setState({
+        displayname: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+    });
+}
 
 
 handleSubmit = async event => {
@@ -28,7 +58,17 @@ handleSubmit = async event => {
     }
     try {
         //sign up code
-        this.setState({redirect:true});
+
+        const UserData = this.state;
+        const msg = await this.HandleSignup(UserData);
+        console.log(msg.success);
+        this.Default();
+        if (msg.success) {
+            localStorage.setItem("token", msg.token);
+            this.setState({redirect:true});
+        }else{
+            alert("please enter valid credentials");
+        }
     }
     catch
     {
