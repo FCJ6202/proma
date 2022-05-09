@@ -2,7 +2,7 @@ import './Classwork.styles.css'
 
 const Classwork = () => (
 
-    <div>hi classwork</div>
+    <div>under construction classwork</div>
 
 )
 

@@ -2,7 +2,7 @@ import './People.styles.css'
 
 const People = () => (
 
-    <div>hello people</div>
+    <div>under construction</div>
 )
 
 export default People;

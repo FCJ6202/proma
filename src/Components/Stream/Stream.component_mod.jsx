@@ -107,7 +107,7 @@ const Stream = () => {
         "courseId": "1",
         "id": "1",
         "text": "Lorem ipsum, quis  consequat.",
-        "creatorName": "Ababa",
+        "creatorName": "Me",
         "creatorUserId": "string",
         "creationTime": "2020-01-01",
         "updateTime": "2020-01-01",
@@ -118,7 +118,7 @@ const Stream = () => {
         "courseId": "1",
         "id": "2",
         "text": "Lorem ipsum, quis  consequat.",
-        "creatorName": "Ababa",
+        "creatorName": "Me",
         "creatorUserId": "string",
         "creationTime": "2020-01-01",
         "updateTime": "2020-01-01",
@@ -129,7 +129,7 @@ const Stream = () => {
         "courseId": "3",
         "id": "3",
         "text": "Lorem ipsum, quis  consequat.",
-        "creatorName": "Ababa",
+        "creatorName": "Me",
         "creatorUserId": "string",
         "creationTime": "2020-01-01",
         "updateTime": "2020-01-01",
@@ -199,7 +199,7 @@ const Stream = () => {
       "courseId": `${classId}`,
       "id": `${ClassPosts.length+1}`,
       "text": `${event.target[0].value}`,
-      "creatorName": "Ababa",             // from authorization
+      "creatorName": "me",             // from authorization
       "creatorUserId": "string",          
       "creationTime": "2020-01-01",       //capture time
       "updateTime": "null",
