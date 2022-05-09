@@ -1,4 +1,4 @@
-import React,{useState,useRef} from 'react'
+import React,{useState,useRef,useEffect} from 'react'
 import Repo from './Repo'
 
 export default function Home() {
@@ -31,29 +31,66 @@ export default function Home() {
             CreatorName: "O.P.Vyas"
         },
     ]// DataBase hume ye object dega
-    const [RepoDetails, setRepoDetails] = useState(FirstDetails); // ye Repo details hai particular user ka
+    const [RepoDetails, setRepoDetails] = useState([]); // ye Repo details hai particular user ka
     const [repo, setrepo] = useState({   // ye Individual repo hai jisme repo and creter ka naam jayega
         RepoName : "",
-        CreatorName : "",
-        Id : 0
+        CreatorName : ""
     })
 
     const Handle = (e) => {
         setrepo({...repo,[e.target.id] : e.target.value.toString()});
     }
 
-    const HandleSubmit = () => { // this is for adding new repo by the user
-        repo.Id = Math.max(...RepoDetails.map(o => o.Id), 0)+1;
-        RepoDetails.push(repo);
+    const AddRepo = async (repoName, createrName) => {
+        const authToken = localStorage.getItem("token");
+        console.log("Add" + authToken);
+        const url = "http://localhost:4000/u/repo/createRepo";
+        const response = await fetch(url, {
+          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            'Content-Type': 'application/json',
+            'auth-token': authToken,
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: JSON.stringify({ repoName, createrName}) // body data type must match "Content-Type" header
+        });
+        const json = await response.json();
+        console.log("Adding a new Repo");
+        console.log(json);
+        RepoDetails.push(json);
         setRepoDetails(RepoDetails);
-        //console.log(RepoDetails);
+      }
+
+    const HandleSubmit = async() => { // this is for adding new repo by the user
+        await AddRepo(repo.RepoName,repo.CreatorName);
         setrepo({
             RepoName : "",
-            CreatorName : "",
-            Id : 0
+            CreatorName : ""
         })
         close.current.click();
     }
+    
+    const FetchData = async () => {
+        const authToken = localStorage.getItem("token");
+        const url = "http://localhost:4000/u/repo/fetchallrepos";
+        const response = await fetch(url, {
+          method: 'GET', // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            'Content-Type': 'application/json',
+            'auth-token': authToken,
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          //body: JSON.stringify(data) // body data type must match "Content-Type" header
+        });
+        const json = await response.json();
+        //console.log(json);
+        setRepoDetails(json);
+      }
+
+    useEffect(async() => {
+      await FetchData();
+    }, [])
+    
 
     return (
         <>
@@ -93,8 +130,8 @@ export default function Home() {
                 <div className="row">
                     {RepoDetails.map((data) => {
                         return (
-                            <div className="col-md-4 my-3" key={data.Id}>
-                                <Repo RepoName={data.RepoName} CreatorName={data.CreatorName} RepoId={data.Id}/>
+                            <div className="col-md-4 my-3" key={data._id}>
+                                <Repo RepoName={data.repoName} CreatorName={data.createrName} RepoId={data._id}/>
                             </div>
                         )
                     })}
@@ -104,8 +141,8 @@ export default function Home() {
                 <div className="row">
                     {RepoDetails.map((data) => {
                         return (
-                            <div className="col-md-4 my-3" key={data.Id}>
-                                <Repo RepoName={data.RepoName} CreatorName={data.CreatorName} RepoId={data.Id}/>
+                            <div className="col-md-4 my-3" key={data._id}>
+                                <Repo RepoName={data.repoName} CreatorName={data.createrName} RepoId={data._id}/>
                             </div>
                         )
                     })}

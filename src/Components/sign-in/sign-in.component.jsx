@@ -17,13 +17,41 @@ class SignIn extends React.Component
         }
     }
 
-    handleSubmit =event => {
+    HandleLogin = async (email, password) => {
+        const url = "http://localhost:4000/u/auth/login";
+        const response = await fetch(url, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify({ email, password }) // body data type must match "Content-Type" header
+        });
+        const json = await response.json();
+        if(json.success){
+            console.log(json);
+        }else{
+            alert("please enter valid credentials");
+        }
+        return json;
+    }
+
+    handleSubmit = async (event) => {
         event.preventDefault();
-        this.setState({email:'',password:''})
+        console.log('login')
+        //this.setState({email:'',password:''})
         
         try {
             //sign in code
-            this.setState({redirect:true});
+            const msg = await this.HandleLogin(this.state.email, this.state.password);
+            //this.Default();
+            console.log(msg.success);
+            if(msg.success){
+                localStorage.setItem("token",msg.authToken);
+                this.setState({redirect:true});
+            }else{
+                alert("please enter valid credentials");
+            }
         }
         catch
         {

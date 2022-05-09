@@ -18,11 +18,13 @@ const UserSchema = new Schema({
     },
 
     createRepo : {
-        type : Object
+        type : Array,
+        default : []
     },
 
     joinRepo : {
-        type : Object
+        type : Array,
+        default : []
     },
 
     date : {
