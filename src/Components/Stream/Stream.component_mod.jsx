@@ -7,11 +7,11 @@ import Bare from './postIcon'
 const Stream = () => {
   const params = useParams();
   const classId = params.classId;
-  console.log(classId)
+  // console.log(classId)
   const ClassInfoArray =
     [
       {
-        "id": "1",
+        "id": "6278dd406312f3625f49d96e",
         "name": "OOP",
         "creatorName": "O.P.Vyas",
         "section": "A",
@@ -138,37 +138,58 @@ const Stream = () => {
       },
     ]
   // console.log(classId)
+
+  const FetchData = async () => {
+    const authToken = localStorage.getItem("token");
+    const url = "http://localhost:4000/u/repo/fetchallrepos";
+    const response = await fetch(url, {
+      method: 'GET', // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        'Content-Type': 'application/json',
+        'auth-token': authToken,
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      //body: JSON.stringify(data) // body data type must match "Content-Type" header
+    });
+    const json = await response.json();
+    // return json
+    json?.map((data) => {
+      console.log(data)
+      if (data._id === classId) {
+        setCurrentClassInfo(data);
+      }
+    })
+
+  }
+
+  useEffect(async() => {
+    const datav = await FetchData();
+  }, [])
+  
+  // useEffect(()=>{
+
+  // },[ClassInfo])
   const [CurrentClassInfo, setCurrentClassInfo] = useState({});
   const [CurrentClassPosts, updateCurrentClassPosts] = useState([]);
   const [ClassArray, SetClassArray] = useState(ClassInfoArray);
   const [ClassPosts, SetClassPosts] = useState(StreamAnnouncementArray);
 
 
-  useEffect(() => {
-    const getClassInfo = () => {
-      ClassArray.map((data) => {
-        if (data.id === classId) {
-          setCurrentClassInfo(data);
-        }
-      })
-    }
-    getClassInfo();
-  }, []);
 
-  useEffect(() => {
-    const arr = []
-    const getClassPosts = () => {
-      ClassPosts.map((data) => {
-        if (data.courseId === classId) {
-          arr.push(data);
-        }
-      })
-    }
-    getClassPosts();
-    updateCurrentClassPosts(arr);
-    console.log(ClassPosts)
-     console.log(CurrentClassPosts);
-  }, [ClassPosts]);
+  // useEffect(() => {
+  //   const arr = []
+  //   const getClassPosts = () => {
+  //     ClassPosts.map((data) => {
+  //       if (data.courseId === classId) {
+  //         arr.push(data);
+  //       }
+  //     })
+  //   }
+  //   getClassPosts();
+  //   updateCurrentClassPosts(arr);
+  //   console.log(ClassPosts)
+  //    console.log(CurrentClassPosts);
+  // }, [ClassPosts]);
 
   const handleSubmit =event => {
     event.preventDefault();
@@ -202,10 +223,10 @@ const Stream = () => {
       <div className='stream'>
         <div className='class-header'>
           <div className='class-title'>
-            {CurrentClassInfo.name}
+            {CurrentClassInfo.repoName}
           </div>
           <div className='class-description'>
-            {CurrentClassInfo.section}
+            {CurrentClassInfo.createrName}
           </div>
         </div>
         <div className="announcement">
