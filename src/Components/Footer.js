@@ -8,7 +8,7 @@ export default function Footer() {
                     {/* <img className="card-img-top" src="..." alt="Card image cap" /> */}
                     <div className="card-body text-white text-center">
                         <h5 className="card-title">Contact</h5>
-                        <p className="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas, cum?</p>
+                        <p className="card-text">Contact us for comments using profiles at github repo</p>
                         <p className="card-text"><small className="text-muted">Crafted with ❤️</small></p>
                     </div>
                 </div>
