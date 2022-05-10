@@ -15,7 +15,7 @@ export default function Card() {
                         <h1 className="card-title" style={{marginTop : "200px"}}>Proma</h1>
                         <p className="card-text">A Project Management System</p>
                         {/* <a href="https://github.com/FCJ6202/proma" className="btn btn-primary">Git Repository</a> */}
-                        <Link to="/Home"><div className="btn btn-primary">Home</div></Link>
+                        {/* <Link to="/Home"><div className="btn btn-primary">Home</div></Link> */}
                     </div>
                 </div>
             </div>
