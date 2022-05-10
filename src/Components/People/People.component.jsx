@@ -46,18 +46,26 @@ const People = () =>
     const HandleSearchName = (e) => {
         setSearchName(e.target.value.toString());
     }
-    const HandleSearch = (e) => {
+    const HandleSearch =  (e) => {
+        console.log(e)
         Students.map((student)=>{
-            if(student.name===e.target.value.toString())
+            if(student.name===SearchName)
             {
-                setFoundName(true)
+                 setFoundName(true)
+                //  console.log(FoundName)
+                    // setFoundName(prev => !prev);
             }
         })
     }
+    useEffect(()=>
+    {
+        setFoundName(false)
+    },[SearchName])
 
     const HandlePromotion = async() => { 
             //handle promotion code
         setSearchName("")
+        setFoundName(false)
         close.current.click();
     }
 
