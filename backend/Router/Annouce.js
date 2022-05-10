@@ -69,4 +69,66 @@ body('Type', 'please enter atleast 4 length type').isLength({ min: 4 })] ,async 
     }
 })
 
+
+router.post('/fetchdata/:RepoId',fetchData ,async (req,res) => {
+    // checking validation of request(req) which was send by user
+
+    try {
+        //const {text,Type} = req.body
+        const userId = req.UserData.id;
+        const CreaterData = await user.findById(userId);
+        const RepoData  = await repo.findById(req.params.RepoId);
+
+        var check = false;
+        RepoData.Admin.map((data)=>{
+            if(data == userId){
+                check = true;
+                //return res.status(400).json({success : false,error : "You are already a admin of this repository"});
+            }
+        })
+        RepoData.Member.map((data) => {
+            if(data == userId){
+                check = true;
+                //return res.status(400).json({success : false,error : "You are already a member of this repository"});
+            }
+        })
+
+        if(!check){
+            return res.status(400).json({success : false,error : "You are not a member og that class"});
+        }
+
+        check = false;
+        CreaterData.createRepo.map((data) => {
+            if(data == req.params.RepoId){
+                check = true;
+                //return res.status(400).json({success : false,error : "You joined that repository already"});
+            }
+        })
+        CreaterData.joinRepo.map((data) => {
+            if(data == req.params.RepoId){
+                check = true;
+                //return res.status(400).json({success : false,error : "You joined that repository already"});
+            }
+        })
+
+        if(!check){
+            return res.status(400).json({success : false,error : "There is some error in database"});
+        }
+
+        var AnnouceArray = [];
+
+        for(var i=0;i<RepoData.Annoucement.length;i++){
+                const temp = await annouce.findById(RepoData.Annoucement[i]);
+                //console.log(temp)
+                AnnouceArray.push(temp);
+        }
+
+        res.json(AnnouceArray);
+
+    } catch (error) {
+        console.log(error)
+        res.json({ error: error.message });
+    }
+})
+
 module.exports = router;

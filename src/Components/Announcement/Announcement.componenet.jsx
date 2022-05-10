@@ -3,15 +3,15 @@ import React from 'react'
 import image from "../../images/profile_pic.png"
 import { Link } from 'react-router-dom'
 
-const Announcement =({id,...props}) => {
-  console.log(props.type)
+const Announcement =(props) => {
   const newTo = { 
-    pathname: `/class/${props.courseId}/stream/${id}/assignment`, 
+    pathname: `/class/${props.RepoId}/stream/${props.id}/assignment`, 
   };
+  
 
     return (
      
-       (props.type==="announcement")?
+       (props.Type==="announcement")?
       <div className="announcement">
           <div className="announcement__informationContainer">
             <div className="announcement__infoSection">
@@ -22,8 +22,8 @@ const Announcement =({id,...props}) => {
                 
                   </div>
                   <div className="announcement__nameAndDate">
-                        <div className="announcement__name">{props.creatorName}</div>
-                        <div className="announcement__date">{props.creationTime}</div>
+                        <div className="announcement__name">{props.CreaterName}</div>
+                        <div className="announcement__date">{props.CreationTime}</div>
                   </div>
             </div>
         

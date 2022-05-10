@@ -165,7 +165,8 @@ const Stream = () => {
   const [CurrentClassInfo, setCurrentClassInfo] = useState({});
   const [CurrentClassPosts, updateCurrentClassPosts] = useState([]);
   const [ClassArray, SetClassArray] = useState(ClassInfoArray);
-  const [ClassPosts, SetClassPosts] = useState(StreamAnnouncementArray);
+  var [ClassPosts, SetClassPosts] = useState([]);
+  //const [CreateAnnouce,setCurrentClassInfo] = useState([])
 
 
 
@@ -183,31 +184,52 @@ const Stream = () => {
   //   console.log(ClassPosts)
   //    console.log(CurrentClassPosts);
   // }, [ClassPosts]);
-
-  const handleSubmit =event => {
-    event.preventDefault();
-    console.log(event)
-    const posts=ClassPosts.slice();
-    const post = {
-      "courseId": `${classId}`,
-      "id": `${ClassPosts.length+1}`,
-      "text": `${event.target[0].value}`,
-      "creatorName": "me",             // from authorization
-      "creatorUserId": "string",          
-      "creationTime": "2020-01-01",       //capture time
-      "updateTime": "null",
-      "type": "announcement",
-      "alternateLink": "classroom.proma/qeoqone",
-    }
-      posts.push(post)
-      SetClassPosts(posts);
-      const currPost=CurrentClassPosts.slice();
-      currPost.push(post)
-      updateCurrentClassPosts(currPost);
-      // console.log(ClassPosts)
-      // console.log(CurrentClassPosts)
-      event.target.reset()
+  const FetchAnnouceData = async () => {
+    const authToken = localStorage.getItem("token");
+    //console.log("Add" + authToken);
+    const url = `http://localhost:4000/u/annouce/fetchdata/${classId}`;
+    const response = await fetch(url, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        'Content-Type': 'application/json',
+        'auth-token': authToken,
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      //body: JSON.stringify({ Type, text}) // body data type must match "Content-Type" header
+    });
+    const json = await response.json();
+    ClassPosts = json;
+    SetClassPosts(ClassPosts);
   }
+  const CreateAnnouce = async (text,Type) => {
+      const authToken = localStorage.getItem("token");
+      //console.log("Add" + authToken);
+      const url = `http://localhost:4000/u/annouce/create/${classId}`;
+      const response = await fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          'Content-Type': 'application/json',
+          'auth-token': authToken,
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify({ Type, text}) // body data type must match "Content-Type" header
+      });
+      const json = await response.json();
+      return json;
+  }
+
+  const handleSubmit = async (event) => {
+    const Type = "announcement";
+    const text = event.target[0].value;
+    await CreateAnnouce(text,Type);
+    event.target.reset()
+  }
+
+  useEffect(async() => {
+    await FetchAnnouceData();
+    //console.log(ClassPosts)
+  }, [])
+  
 
 
   return (
@@ -231,9 +253,12 @@ const Stream = () => {
 
         {
 
-          (CurrentClassPosts)?.slice(0).reverse().map(({ id, ...otherProps }) => {
+          ClassPosts.map(({ _id, ...otherProps }) => {
               return (
-                  <Announcement key={id} id={id} {...otherProps} />
+                  //<Announcement key={_id} id={_id} {...otherProps} />
+                  <div key={_id} >
+                      <Announcement id={_id} {...otherProps} />
+                    </div>
               )
             
           }
