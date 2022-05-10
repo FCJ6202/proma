@@ -42,7 +42,7 @@ const People = () =>
     const [code, setcode] = useState("ewfjbuiewf"); //get code using db
     const [SearchName, setSearchName] = useState(""); //get code using db
     const [FoundName, setFoundName] = useState(false); //get code using db
-
+    const [SearchClicked,setSearchClicked]=useState(false);
     const HandleSearchName = (e) => {
         setSearchName(e.target.value.toString());
     }
@@ -56,10 +56,12 @@ const People = () =>
                     // setFoundName(prev => !prev);
             }
         })
+        setSearchClicked(true)
     }
     useEffect(()=>
     {
         setFoundName(false)
+        setSearchClicked(false)
     },[SearchName])
 
     const HandlePromotion = async() => { 
@@ -99,10 +101,14 @@ const People = () =>
                             </div>
                             <button type="submit" className="btn btn-primary" onClick={HandleSearch} >Search</button>
                             {
-                                (FoundName)?
-                                <div>Found Student, click to promote</div>
+                                (SearchClicked)?
+                                        (FoundName)?
+                                        <div>Found Student, click to promote</div>
+                                        :
+                                        <div>Not found</div>
+
                                 :
-                                <div>Not found</div>
+                                    <></>
                             }
                         </div>
                         <div className="modal-footer">

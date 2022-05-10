@@ -123,7 +123,7 @@ export default function Home() {
                                 <input type="text" className="form-control" required value={repo.RepoName} onChange={Handle} id="RepoName" />
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="exampleInputCreater" className="form-label">Creater Name</label>
+                                <label htmlFor="exampleInputCreator" className="form-label">Creator Name</label>
                                 <input type="text" className="form-control" required value={repo.CreatorName} onChange={Handle} id="CreatorName" />
                             </div>
                         </div>
