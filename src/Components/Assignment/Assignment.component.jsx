@@ -9,6 +9,8 @@ const Assignment = ( ) =>
     const params= useParams();
     const postId=params.postId;
     console.log(postId);
+    console.log("iquehf")
+    console.log(postId)
     const openInNewTab = (url) => {
         const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
         if (newWindow) newWindow.opener = null
@@ -84,7 +86,9 @@ const Assignment = ( ) =>
                   setCurrentAssignment(curr);
                   console.log(curr)
                   console.log(CurrentAssignment)
-                } catch(error) {
+                } 
+                
+                catch(error) {
                   console.log(error)
                   console.log("qiewuhdw")
                 }
@@ -214,11 +218,12 @@ rel = "noopener noreferrer"> {`${material.name}`}</a><br></br></>)})}
                     <div className="submission-status">{`${AssignmentStatus}`}</div>
 
                 </div>
-                {/* <div className="submission-preview"></div> */}
-                <div className="button-wrapper"><input type="file" onChange={handleFileSelect}/></div>
-                {/* <input type="submit" value="Upload File" /> */}
-                <div className="button-wrapper"><button className="submit-button" type="submit" value="Upload File">Submit</button></div>
                 <form onSubmit={handleSubmit}>
+                    {/* <div className="submission-preview"></div> */}
+                    <div className="button-wrapper"><input type="file" onChange={handleFileSelect}/></div>
+                    {/* <input type="submit" value="Upload File" /> */}
+                <div className="button-wrapper"><button className="submit-button" type="submit" value="Upload File">Submit</button></div>
+
                 </form>
 
 

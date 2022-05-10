@@ -11,7 +11,7 @@ const Announcement =({id,...props}) => {
 
     return (
      
-       (props.type==="assignment")?
+       (props.type==="announcement")?
       <div className="announcement">
           <div className="announcement__informationContainer">
             <div className="announcement__infoSection">

@@ -11,9 +11,10 @@
 {
     height: 300px;
     width:auto;
-    background-color: blue;    
+    background-color: #890F0D;    
     color: white;
     padding: 5%;
+    margin-bottom: 40px;
 }
 .class-title
 {
@@ -29,3 +30,44 @@
     padding: 2%;
     
 }
+
+.announcement {
+    width: 80%;
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid #adadad;
+    margin-bottom: 20px;
+  }
+
+  .form-post
+  {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+  .input
+  {
+    border-style: none;
+    color: rgb(2, 81, 90);
+    width: 100%;
+  }
+.input:focus
+{
+    border: 1px solid rgb(10, 215, 215) ;
+    box-shadow: 0 0 3px rgb(10, 215, 215) ;
+    -moz-box-shadow: 0 0 3px rgb(10, 215, 215)  ;
+    -webkit-box-shadow: 0 0 3px rgb(10, 215, 215);
+}
+
+input:focus, textarea:focus, select:focus {
+    outline-offset: 0px ;
+    outline: none ;
+}
+
+.post-button
+{
+    border: none;
+    background-color: white;
+}
+    
+        

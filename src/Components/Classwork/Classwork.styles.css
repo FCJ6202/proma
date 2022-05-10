@@ -1,0 +1,21 @@
+.classwork
+{
+    margin-left: 25%;
+    margin-right: 25%;
+}
+.create
+{
+    background-color: rgb(3, 77, 81);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight:bolder;
+    border: none;
+    width: 110px;
+    border-radius: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 11px;
+    margin-top:5%;
+}
+
