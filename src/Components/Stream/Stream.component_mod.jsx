@@ -219,9 +219,14 @@ const Stream = () => {
   }
 
   const handleSubmit = async (event) => {
+    //event.preventDefault();
     const Type = "announcement";
     const text = event.target[0].value;
-    await CreateAnnouce(text,Type);
+    const json = await CreateAnnouce(text,Type);
+    if(!json.success){
+      alert(json.error);
+    }
+    //console.log(json);
     event.target.reset()
   }
 

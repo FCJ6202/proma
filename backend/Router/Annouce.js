@@ -65,7 +65,7 @@ body('Type', 'please enter atleast 4 length type').isLength({ min: 4 })] ,async 
 
     } catch (error) {
         console.log(error)
-        res.json({ error: error.message });
+        res.json({ success : false,error: error.message });
     }
 })
 
