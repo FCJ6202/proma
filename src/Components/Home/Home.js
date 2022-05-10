@@ -36,10 +36,15 @@ export default function Home() {
         RepoName : "",
         CreatorName : ""
     })
+    const [code, setcode] = useState(""); // ye Repo details hai particular user ka
 
     const Handle = (e) => {
         setrepo({...repo,[e.target.id] : e.target.value.toString()});
     }
+    const HandleCode = (e) => {
+        setrepo(e.target.value.toString());
+    }
+
 
     const AddRepo = async (repoName, createrName) => {
         const authToken = localStorage.getItem("token");
@@ -69,7 +74,12 @@ export default function Home() {
         })
         close.current.click();
     }
-    
+    const HandleCodeSubmit = async() => { // this is for adding new repo by the user using code
+        // await AddRepo(repo.RepoName,repo.CreatorName);
+        setcode("")
+        close.current.click();
+    }
+
     const FetchData = async () => {
         const authToken = localStorage.getItem("token");
         const url = "http://localhost:4000/u/repo/fetchallrepos";
@@ -104,7 +114,7 @@ export default function Home() {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 className="modal-title" id="exampleModalLabel">Create Repository</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
@@ -124,6 +134,35 @@ export default function Home() {
                     </div>
                 </div>
             </div>
+
+            {/* <!-- Button trigger modal --> */}
+            <button type="button" /*style={{ display: "none" }}*/ className="btn btn-primary" /*ref={ref}*/ data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                Join Repository
+            </button>
+
+            {/* <!-- Modal --> */}
+            <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Join Repository</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <div className="mb-3">
+                                <label htmlFor="exampleInputRepo" className="form-label">Repository Code</label>
+                                <input type="text" className="form-control" required value={code} onChange={HandleCode} id="code" />
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" ref={close} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" className="btn btn-primary" onClick={HandleCodeSubmit} >Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             <div className="container">
                 <h1 className='text-center'>Your Repository</h1>
                 {/* There is user Repository which was he/she will create */}
