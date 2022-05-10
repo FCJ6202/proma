@@ -131,4 +131,15 @@ router.post('/JoinRepo/:RepoId/:Type',fetchData,async (req,res) => {
     }
 })
 
+router.post('/Repodata/:RepoId',fetchData, async (req, res) => {
+    try {
+      const id = req.params.RepoId;
+      const repoData = await repo.findById(id).select("-password");
+      res.json(repoData);
+    } catch (error) {
+      console.log(error)
+      res.json({error: error.message });
+    }
+  })
+
 module.exports = router;

@@ -32,6 +32,7 @@ export default function Home() {
         },
     ]// DataBase hume ye object dega
     const [RepoDetails, setRepoDetails] = useState([]); // ye Repo details hai particular user ka
+    const [JoinRepoDetails, setJoinRepoDetails] = useState([]);
     const [repo, setrepo] = useState({   // ye Individual repo hai jisme repo and creter ka naam jayega
         RepoName : "",
         CreatorName : ""
@@ -44,6 +45,56 @@ export default function Home() {
     const HandleCode = (e) => {
         setrepo(e.target.value.toString());
     }
+
+    const RepoDataById = async (RepoId) => {
+        const authToken = localStorage.getItem("token");
+        //console.log("Add" + authToken);
+        const url = `http://localhost:4000/u/repo/Repodata/${RepoId}`;
+        const response = await fetch(url, {
+          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            'Content-Type': 'application/json',
+            'auth-token': authToken,
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          //body: JSON.stringify({ repoName, createrName}) // body data type must match "Content-Type" header
+        });
+        const json = await response.json();
+
+        return json;
+    }
+
+    const UserDetails = async () => {
+        const authToken = localStorage.getItem("token");
+        //console.log("Add" + authToken);
+        const url = "http://localhost:4000/u/auth/userdata";
+        const response = await fetch(url, {
+          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            'Content-Type': 'application/json',
+            'auth-token': authToken,
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          //body: JSON.stringify({ repoName, createrName}) // body data type must match "Content-Type" header
+        });
+        const json = await response.json();
+        return json;
+    }
+
+    const FillJoinRepoDetails = async () => { // All Repo Which is join by user
+        const UserData = await UserDetails();
+        JoinRepoDetails.length = 0;
+
+        for(var i=0;i<UserData.joinRepo.length;i++){
+            //console.log(i);
+            const temp = await RepoDataById(UserData.joinRepo[i]);
+            JoinRepoDetails.push(temp);
+        }
+
+        return JoinRepoDetails;
+    }
+
+
 
 
     const AddRepo = async (repoName, createrName) => {
@@ -98,8 +149,10 @@ export default function Home() {
       }
 
     useEffect(async() => {
-      await FetchData();
-    }, [])
+        const JoinRepoData =  await FillJoinRepoDetails();
+        setJoinRepoDetails(JoinRepoData)
+        await FetchData();
+    },[])
     
 
     return (
@@ -178,7 +231,7 @@ export default function Home() {
                 <h1 className='text-center'>Joined Repository</h1>
                 {/* There is Repository which was joined by this user but not created */}
                 <div className="row">
-                    {RepoDetails.map((data) => {
+                    {JoinRepoDetails.map((data) => {
                         return (
                             <div className="col-md-4 my-3" key={data._id}>
                                 <Repo RepoName={data.repoName} CreatorName={data.createrName} RepoId={data._id}/>
