@@ -139,31 +139,24 @@ const Stream = () => {
     ]
   // console.log(classId)
 
-  const FetchData = async () => {
+  const RepoDataById = async () => {
     const authToken = localStorage.getItem("token");
-    const url = "http://localhost:4000/u/repo/fetchallrepos";
+    //console.log("Add" + authToken);
+    const url = `http://localhost:4000/u/repo/Repodata/${classId}`;
     const response = await fetch(url, {
-      method: 'GET', // *GET, POST, PUT, DELETE, etc.
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json',
         'auth-token': authToken,
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      //body: JSON.stringify(data) // body data type must match "Content-Type" header
+      //body: JSON.stringify({ repoName, createrName}) // body data type must match "Content-Type" header
     });
     const json = await response.json();
-    // return json
-    json?.map((data) => {
-      console.log(data)
-      if (data._id === classId) {
-        setCurrentClassInfo(data);
-      }
-    })
-
-  }
-
+    setCurrentClassInfo(json);
+}
   useEffect(async() => {
-    const datav = await FetchData();
+    const datav = await RepoDataById();
   }, [])
   
   // useEffect(()=>{
