@@ -7,6 +7,28 @@ import Announcement from '../Announcement/Announcement.componenet'
 const Classwork = () => 
 {
     const classId = window.document.URL.slice(28,52);
+    console.log(" is teacher in this filr");
+    const [IsTeacher,setIsTeacher]=useState(false); // update using useeffect and 
+    const DetermineBool = async () => {
+        const authToken = localStorage.getItem("token");
+        //console.log("Add" + authToken);
+        const url = `http://localhost:4000/u/auth/${classId}/usercheck`;
+        const response = await fetch(url, {
+          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            'Content-Type': 'application/json',
+            'auth-token': authToken,
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          //body: JSON.stringify({ repoName, createrName}) // body data type must match "Content-Type" header
+        });
+        const json = await response.json();
+        console.log(json)
+        setIsTeacher(json);
+    }
+    useEffect( async ()=>{
+        await DetermineBool(); 
+    },[])
     var [StreamAnnouncementArray, setStreamAnnouncementArray] = useState([])
     // const StreamAnnouncementArray =
     // [
@@ -206,9 +228,9 @@ const Classwork = () =>
                 {
                     (IsTeacher)?
                    
-                    (StreamAnnouncementArray)?.slice(0).reverse().map(({ id, ...otherProps }) => {
+                    (StreamAnnouncementArray)?.slice(0).reverse().map(({ _id, ...otherProps }) => {
                         return (
-                            <Announcement key={id} id={id} view="teacher" {...otherProps} />
+                            <Announcement key={_id} id={_id} view="teacher" {...otherProps} />
                         )
                               
                     }
@@ -216,7 +238,7 @@ const Classwork = () =>
 
                     (StreamAnnouncementArray)?.slice(0).reverse().map(({ _id, ...otherProps }) => {
                         return (
-                         <Announcement key={_id} id={_id} {...otherProps} />
+                         <Announcement key={_id} id={_id} view="teacher" {...otherProps} />
                         )
                               
                     }
