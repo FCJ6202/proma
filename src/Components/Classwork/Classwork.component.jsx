@@ -6,42 +6,44 @@ import Announcement from '../Announcement/Announcement.componenet'
 
 const Classwork = () => 
 {
-    const StreamAnnouncementArray =
-    [
-      {
-        "courseId": "1",
-        "id": "1",
-        "text": "Lorem ipsum, quis  consequat.",
-        "creatorName": "Me",
-        "creatorUserId": "string",
-        "creationTime": "2020-01-01",
-        "updateTime": "2020-01-01",
-        "type": "announcement",
-        "alternateLink": "classroom.proma/qeoqone",
-      },
-      {
-        "courseId": "1",
-        "id": "2",
-        "text": "Lorem ipsum, quis  consequat.",
-        "creatorName": "Me",
-        "creatorUserId": "string",
-        "creationTime": "2020-01-01",
-        "updateTime": "2020-01-01",
-        "type": "assignment",
-        "alternateLink": "classroom.proma/qeoqone",
-      },
-      {
-        "courseId": "3",
-        "id": "3",
-        "text": "Lorem ipsum, quis  consequat.",
-        "creatorName": "Me",
-        "creatorUserId": "string",
-        "creationTime": "2020-01-01",
-        "updateTime": "2020-01-01",
-        "type": "announcement",
-        "alternateLink": "classroom.proma/qeoqone",
-      },
-    ]
+    const classId = window.document.URL.slice(28,52);
+    var [StreamAnnouncementArray, setStreamAnnouncementArray] = useState([])
+    // const StreamAnnouncementArray =
+    // [
+    //   {
+    //     "courseId": "1",
+    //     "id": "1",
+    //     "text": "Lorem ipsum, quis  consequat.",
+    //     "creatorName": "Me",
+    //     "creatorUserId": "string",
+    //     "creationTime": "2020-01-01",
+    //     "updateTime": "2020-01-01",
+    //     "type": "announcement",
+    //     "alternateLink": "classroom.proma/qeoqone",
+    //   },
+    //   {
+    //     "courseId": "1",
+    //     "id": "2",
+    //     "text": "Lorem ipsum, quis  consequat.",
+    //     "creatorName": "Me",
+    //     "creatorUserId": "string",
+    //     "creationTime": "2020-01-01",
+    //     "updateTime": "2020-01-01",
+    //     "type": "assignment",
+    //     "alternateLink": "classroom.proma/qeoqone",
+    //   },
+    //   {
+    //     "courseId": "3",
+    //     "id": "3",
+    //     "text": "Lorem ipsum, quis  consequat.",
+    //     "creatorName": "Me",
+    //     "creatorUserId": "string",
+    //     "creationTime": "2020-01-01",
+    //     "updateTime": "2020-01-01",
+    //     "type": "announcement",
+    //     "alternateLink": "classroom.proma/qeoqone",
+    //   },
+    // ]
 
     // const [courseId,setCourseId]=useState("1"); // collect from db
     const [Assignment, setAssignment] = useState({   // ye Individual repo hai jisme repo and creter ka naam jayega
@@ -81,8 +83,49 @@ const Classwork = () =>
         setAssignment({...Assignment,["Due"] : e});
     }
 
+    const AddAssignment = async (title,text,points,materials,dueDate,dueTime,Type) => {
+        const authToken = localStorage.getItem("token");
+        //console.log("Add" + authToken);
+        const url = `http://localhost:4000/u/assign/create/${classId}`;
+        const response = await fetch(url, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            headers: {
+            'Content-Type': 'application/json',
+            'auth-token': authToken,
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify({ title,text,points,materials,dueDate,dueTime,Type}) // body data type must match "Content-Type" header
+        });
+        const json = await response.json();
+        return json;
+    }
+
+    const FetchAssignData = async () => {
+        const authToken = localStorage.getItem("token");
+        //console.log("Add" + authToken);
+        const url = `http://localhost:4000/u/assign/fetchdata/${classId}`;
+        const response = await fetch(url, {
+          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            'Content-Type': 'application/json',
+            'auth-token': authToken,
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          //body: JSON.stringify({ Type, text}) // body data type must match "Content-Type" header
+        });
+        const json = await response.json();
+        StreamAnnouncementArray = json;
+        setStreamAnnouncementArray(StreamAnnouncementArray);
+      }
+
     const HandleSubmit = async() => { // this is for adding new repo by the user
         // await AddRepo(repo.RepoName,repo.CreatorName);
+        const materials = {
+            "name" : "testpaper",
+            "link" : Assignment.Materials
+        }
+        const data = await AddAssignment(Assignment.Title,Assignment.Instructions,Assignment.Points,materials,Assignment.Due,"300","assignment");
+        console.log(data);
         setAssignment({
             Title : "",
             CreatorName : "",
@@ -94,6 +137,10 @@ const Classwork = () =>
         close.current.click();
     }
 
+    useEffect(async () => {
+        await FetchAssignData();
+    }, [])
+    
     return (
         <div className='classwork'>
             {/* <!-- Button trigger modal --> */}
@@ -147,10 +194,9 @@ const Classwork = () =>
 
                 {
 
-                    (StreamAnnouncementArray)?.slice(0).reverse().map(({ id, ...otherProps }) => {
+                    (StreamAnnouncementArray)?.slice(0).reverse().map(({ _id, ...otherProps }) => {
                         return (
-                         (otherProps.type=="assignment")?   <Announcement key={id} id={id} {...otherProps} />
-                        :<></> 
+                         <Announcement key={_id} id={_id} {...otherProps} />
                         )
                               
                     }
