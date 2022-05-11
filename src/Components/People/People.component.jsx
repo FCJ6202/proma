@@ -6,21 +6,25 @@ import React,{useState,useRef,useEffect} from 'react'
     const Teachers=[
         {
             name:"OP Vyas",
-            id:"1"
+            id:"1",
+            email:"vyas@gmail.com"
         },
         {
             name:"Bagesh Kumar",
-            id:"2"
+            id:"2",
+            email:"bagesh@gmail.com"
 
         },
         {
             name:"Nand Yadav",
-            id:"3"
+            id:"3",
+            email:"nand@gmail.com"
 
         },
         {
             name:"Aditya Singh",
-            id:"4"
+            id:"4",
+            email:"aditya@gmail.com"
 
         }  
    
@@ -28,11 +32,13 @@ import React,{useState,useRef,useEffect} from 'react'
     const Students=[
         {
             name:"Aman Utkarsh",
-            id:"1"
+            id:"1",
+            email:"aman@gmail.com"
         },
         {
             name:"Jitu Rajak",
-            id:"2"
+            id:"2",
+            email:"jitu@gmail.com"
         }  
        ]
 
@@ -49,7 +55,7 @@ const People = () =>
     const HandleSearch =  (e) => {
         console.log(e)
         Students.map((student)=>{
-            if(student.name===SearchName)
+            if(student.email===SearchName)
             {
                  setFoundName(true)
                 //  console.log(FoundName)
@@ -96,7 +102,7 @@ const People = () =>
                         </div>
                         <div className="modal-body">
                             <div className="mb-3">
-                                <label htmlFor="exampleInputRepo" className="form-label">Search Name</label>
+                                <label htmlFor="exampleInputRepo" className="form-label">Search Email</label>
                                 <input type="text" className="form-control" required value={SearchName} onChange={HandleSearchName} id="SearchName" />
                             </div>
                             <button type="submit" className="btn btn-primary" onClick={HandleSearch} >Search</button>
