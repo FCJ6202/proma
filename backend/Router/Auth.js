@@ -100,4 +100,16 @@ router.post('/userdata', fetchData, async (req, res) => {
     }
   })
 
+
+  router.post('/userdata/:UserId', fetchData, async (req, res) => {
+    try {
+      const id = req.params.UserId;
+      const userData = await user.findById(id).select("-password");
+      res.json(userData);
+    } catch (error) {
+      console.log(error)
+      res.json({error: error.message });
+    }
+  })
+
 module.exports = router;
