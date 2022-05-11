@@ -6,6 +6,31 @@ import axios from 'axios';
 
 const Assignment = ( ) =>
 {
+    const repoId = window.document.URL.slice(28,52);
+
+    console.log("isteacher in this file");
+    const [IsTeacher,setIsTeacher]=useState(true); // update using useeffect and 
+    const DetermineBool = async () => {
+        const authToken = localStorage.getItem("token");
+        //console.log("Add" + authToken);
+        const url = `http://localhost:4000/u/auth/${repoId}/usercheck`;
+        const response = await fetch(url, {
+          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            'Content-Type': 'application/json',
+            'auth-token': authToken,
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          //body: JSON.stringify({ repoName, createrName}) // body data type must match "Content-Type" header
+        });
+        const json = await response.json();
+        console.log(json)
+        setIsTeacher(json);
+    }
+    useEffect( async ()=>{
+        await DetermineBool(); 
+    },[])
+
     const params= useParams();
     const postId=params.postId;
     console.log(postId);
@@ -61,7 +86,7 @@ const Assignment = ( ) =>
             const [CurrentTime,setTime]=useState({});
             const [AssignmentStatus,SetAssignmentStatus]=useState("");
             const [selectedFile, setSelectedFile] = React.useState(null);
-          
+
             const handleSubmit =async (event) => {
                 console.log("enter handle submit");
                 event.preventDefault()
@@ -211,7 +236,16 @@ rel = "noopener noreferrer"> {`${material.name}`}</a><br></br></>)})}
 
             <hr className="line"></hr>
 
-        </div><div className="submission">
+
+
+        </div>
+
+     
+        {
+                (IsTeacher)?
+                <></>
+                :
+                <div className="submission">
 
                 <div className="submission-header">
                     <div className="submission-title">Your work</div>
@@ -229,6 +263,10 @@ rel = "noopener noreferrer"> {`${material.name}`}</a><br></br></>)})}
 
             </div>
 
+
+        }
+        
+      
 
             </div>
        

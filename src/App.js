@@ -11,6 +11,8 @@ import People from './Components/People/People.component';
 import Classwork from './Components/Classwork/Classwork.component';
 import Stream from './Components/Stream/Stream.component_mod';
 import Assignment from './Components/Assignment/Assignment.component';
+import Marks from './Components/Marks/Marks.component';
+import ViewSubmission from './Components/view-submissions/view-submissions.component';
 const myInlineStyle={
   color:'black',
   fontSize:'40px',
@@ -40,9 +42,13 @@ function App() {
           <Route path="class/:classId" element={<ClassView/>}>
               <Route path = "/class/:classId/people" element = {<People/>} />
               <Route path = "/class/:classId/classwork" element = {<Classwork/>} />
+              <Route path = "/class/:classId/classwork/:postId" element = {<ViewSubmission/>} >
+                    <Route path="/class/:classId/classwork/:postId/" element={<Assignment/>}/>       
+                    <Route path="/class/:classId/classwork/:postId/marks" element={<Marks/>}/>                             
+              </Route>
+
               <Route path = "/class/:classId/" element = {<Stream/>} />
               <Route path="/class/:classId/stream/:postId/assignment" element={<Assignment/>}/>
-          
           </Route>
           
 

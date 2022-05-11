@@ -6,6 +6,30 @@ import Announcement from '../Announcement/Announcement.componenet'
 
 const Classwork = () => 
 {
+    const repoId = window.document.URL.slice(28,52);
+    console.log(" is teacher in this filr");
+    const [IsTeacher,setIsTeacher]=useState(false); // update using useeffect and 
+    const DetermineBool = async () => {
+        const authToken = localStorage.getItem("token");
+        //console.log("Add" + authToken);
+        const url = `http://localhost:4000/u/auth/${repoId}/usercheck`;
+        const response = await fetch(url, {
+          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            'Content-Type': 'application/json',
+            'auth-token': authToken,
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          //body: JSON.stringify({ repoName, createrName}) // body data type must match "Content-Type" header
+        });
+        const json = await response.json();
+        console.log(json)
+        setIsTeacher(json);
+    }
+    useEffect( async ()=>{
+        await DetermineBool(); 
+    },[])
+
     const StreamAnnouncementArray =
     [
       {
@@ -54,6 +78,7 @@ const Classwork = () =>
     })
     const close = useRef(null);
 
+
     function isNumeric(str) {
         return !isNaN(str)       
     }
@@ -96,60 +121,81 @@ const Classwork = () =>
 
     return (
         <div className='classwork'>
-            {/* <!-- Button trigger modal --> */}
-            <button className='create'  data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <div className='icon'><FaPlus/></div>
-                    <div>Create</div>
-            </button>
+            
+{
 
-            {/* <!-- Modal --> */}
-            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Assignment</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div className="modal-body">
-                            <div className="mb-3">
-                                <label htmlFor="exampleInputRepo" className="form-label">Title</label>
-                                <input type="text" className="form-control" required value={Assignment.Title} onChange={Handle} id="Title" />
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="exampleInputCreater" className="form-label">Instructions</label>
-                                <textarea type="text" className="form-control" required value={Assignment.Instructions} onChange={Handle} id="Instructions" />
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="exampleInputCreater" className="form-label">Points</label>
-                                <input type="text" className="form-control" required value={Assignment.Points} onChange={Handle} id="Points" />
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="exampleInputCreater" className="form-label">Material</label>
-                                <input type="text" className="form-control" required value={Assignment.Materials} onChange={Handle} id="Materials" />
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="exampleInputCreater" className="form-label">Due</label>
-                                {/* <input type="text" className="form-control" required value={Assignment.Due} onChange={Handle} id="Due" /> */}
-                              <div><DateTimePicker onChange={HandleDue} value={Assignment.Due} id="Due" /></div>
-                                
-                            </div>
+(IsTeacher)?
 
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" ref={close} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" className="btn btn-primary" onClick={HandleSubmit} >Save changes</button>
+        <>
+                    {/* <!-- Button trigger modal --> */}
+                    <button className='create'  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <div className='icon'><FaPlus/></div>
+                            <div>Create</div>
+                    </button>
+        
+                    {/* <!-- Modal --> */}
+                    <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div className="modal-dialog">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title" id="exampleModalLabel">Assignment</h5>
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div className="modal-body">
+                                    <div className="mb-3">
+                                        <label htmlFor="exampleInputRepo" className="form-label">Title</label>
+                                        <input type="text" className="form-control" required value={Assignment.Title} onChange={Handle} id="Title" />
+                                    </div>
+                                    <div className="mb-3">
+                                        <label htmlFor="exampleInputCreater" className="form-label">Instructions</label>
+                                        <textarea type="text" className="form-control" required value={Assignment.Instructions} onChange={Handle} id="Instructions" />
+                                    </div>
+                                    <div className="mb-3">
+                                        <label htmlFor="exampleInputCreater" className="form-label">Points</label>
+                                        <input type="text" className="form-control" required value={Assignment.Points} onChange={Handle} id="Points" />
+                                    </div>
+                                    <div className="mb-3">
+                                        <label htmlFor="exampleInputCreater" className="form-label">Material</label>
+                                        <input type="text" className="form-control" required value={Assignment.Materials} onChange={Handle} id="Materials" />
+                                    </div>
+                                    <div className="mb-3">
+                                        <label htmlFor="exampleInputCreater" className="form-label">Due</label>
+                                        {/* <input type="text" className="form-control" required value={Assignment.Due} onChange={Handle} id="Due" /> */}
+                                      <div><DateTimePicker onChange={HandleDue} value={Assignment.Due} id="Due" /></div>
+                                        
+                                    </div>
+        
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="button" ref={close} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" className="btn btn-primary" onClick={HandleSubmit} >Save changes</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-                <hr/>
-
+                        <hr/>
+                        </>
+                        :
+                         <></>
+        
+}
 
                 {
-
+                    (IsTeacher)?
+                   
                     (StreamAnnouncementArray)?.slice(0).reverse().map(({ id, ...otherProps }) => {
                         return (
-                         (otherProps.type=="assignment")?   <Announcement key={id} id={id} {...otherProps} />
+                         (otherProps.type=="assignment")?   <Announcement key={id} id={id} view="teacher" {...otherProps} />
+                        :<></> 
+                        )
+                              
+                    }
+                    )
+
+                    :
+                    (StreamAnnouncementArray)?.slice(0).reverse().map(({ id, ...otherProps }) => {
+                        return (
+                         (otherProps.type=="assignment")?   <Announcement key={id} view="student" id={id} {...otherProps} />
                         :<></> 
                         )
                               

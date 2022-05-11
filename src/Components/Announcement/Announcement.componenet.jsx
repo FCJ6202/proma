@@ -3,11 +3,10 @@ import React from 'react'
 import image from "../../images/profile_pic.png"
 import { Link } from 'react-router-dom'
 
-const Announcement =(props) => {
-  const newTo = { 
-    pathname: `/class/${props.RepoId}/stream/${props.id}/assignment`, 
-  };
+const Announcement =({id,...props}) => {
+  console.log(props.type)
   
+  const newTo = (props.view==="student")?{ pathname: `/class/${props.courseId}/stream/${id}/assignment`}:{ pathname: `/class/${props.courseId}/classwork/${id}`};
 
     return (
      

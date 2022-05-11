@@ -36,8 +36,16 @@ export default function ClassNavbar(props) {
                             </li>
                         </ul>
                         <form className="d-flex">
+                        {
+                          (localStorage.getItem("token")!=="null")?
+                          <Link to ="/signIn" onClick={()=>{localStorage.setItem("token",null)}}> <button className="btn btn-outline-dark" type="link">LogOut</button></Link>
+                          :
+                          <Link to ="/signIn"> <button className="btn btn-outline-dark" type="link">Login/Signup</button></Link>
+
+                        }
                            
                         </form>
+
                     </div>
                 </div>
             </nav>

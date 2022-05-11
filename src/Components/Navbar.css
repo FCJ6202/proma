@@ -2,3 +2,15 @@
 {
     cursor: pointer; 
 }
+.home
+{
+    text-decoration: none;
+
+}
+.home-btn
+{
+    border: none;
+    background-color: #F8F9FA;
+    color: #a6a6a634;
+
+}
