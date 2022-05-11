@@ -33,6 +33,7 @@ export default function Home() {
     ]// DataBase hume ye object dega
     const [RepoDetails, setRepoDetails] = useState([]); // ye Repo details hai particular user ka
     const [JoinRepoDetails, setJoinRepoDetails] = useState([]);
+
     const [repo, setrepo] = useState({   // ye Individual repo hai jisme repo and creter ka naam jayega
         RepoName : "",
         CreatorName : ""
@@ -43,7 +44,7 @@ export default function Home() {
         setrepo({...repo,[e.target.id] : e.target.value.toString()});
     }
     const HandleCode = (e) => {
-        setrepo(e.target.value.toString());
+        setcode(e.target.value.toString());
     }
 
     const RepoDataById = async (RepoId) => {
@@ -94,9 +95,6 @@ export default function Home() {
         return JoinRepoDetails;
     }
 
-
-
-
     const AddRepo = async (repoName, createrName) => {
         const authToken = localStorage.getItem("token");
         console.log("Add" + authToken);
@@ -117,6 +115,22 @@ export default function Home() {
         setRepoDetails(RepoDetails);
       }
 
+      const FetchJoinRepoCode = async () => {
+        const authToken = localStorage.getItem("token");
+        //console.log("Add" + authToken);
+        const url = `http://localhost:4000/u/repo/JoinRepo/${code}/1`;
+        const response = await fetch(url, {
+          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            'Content-Type': 'application/json',
+            'auth-token': authToken,
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        });
+        const json = await response.json();
+      }
+
+
     const HandleSubmit = async() => { // this is for adding new repo by the user
         await AddRepo(repo.RepoName,repo.CreatorName);
         setrepo({
@@ -125,10 +139,16 @@ export default function Home() {
         })
         close.current.click();
     }
-    const HandleCodeSubmit = async() => { // this is for adding new repo by the user using code
+    const HandleCodeSubmit = async(e) => { // this is for adding new repo by the user using code
         // await AddRepo(repo.RepoName,repo.CreatorName);
-        setcode("")
+        console.log(e);
+        await FetchJoinRepoCode();
         close.current.click();
+        window.location.reload();
+    }
+
+    const HandleSubmitForJoin = async () => {
+        console.log("JoinRepo");
     }
 
     const FetchData = async () => {
