@@ -3,6 +3,7 @@ import {Link } from "react-router-dom";
 import "./Navbar.css"
 
 export default function Navbar() {
+
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -14,7 +15,14 @@ export default function Navbar() {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <a className="nav-link active" style={{marginRight : "20px"}}aria-current="page" href="#">Home</a>
+                                {/* <a className="nav-link active" style={{marginRight : "20px"}}aria-current="page" href="#">Home</a> */}
+                                {
+                                    (localStorage.getItem("token")!=="null")?
+                                    <Link to ="/home" className='home'> <button  type="link" className="nav-link active home-btn" style={{marginRight : "20px"}}aria-current="page">Home</button></Link>
+                                    :
+                                    <Link to ="/signIn" className='home'> <button  type="link" className="nav-link active home-btn" style={{marginRight : "20px"}}aria-current="page">Home</button></Link>
+                                }
+
                             </li>
                             <li className="nav-item">
                                 {/* <a className="nav-link" style={{marginRight : "20px"}} href="#">About</a> */}
@@ -26,7 +34,13 @@ export default function Navbar() {
                             </li>
                         </ul>
                         <form className="d-flex">
-                        <Link to ="/signIn"> <button className="btn btn-outline-dark" type="link">Login/Signup</button></Link>
+                        {
+                          (localStorage.getItem("token")!=="null")?
+                          <Link to ="/signIn" onClick={()=>{localStorage.setItem("token",null)}}> <button className="btn btn-outline-dark" type="link">LogOut</button></Link>
+                          :
+                          <Link to ="/signIn"> <button className="btn btn-outline-dark" type="link">Login/Signup</button></Link>
+
+                        }
                            
                         </form>
                     </div>

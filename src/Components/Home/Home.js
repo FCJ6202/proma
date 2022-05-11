@@ -1,6 +1,6 @@
 import React,{useState,useRef,useEffect} from 'react'
 import Repo from './Repo'
-
+import Navbar from "../Navbar"
 export default function Home() {
 
     const close = useRef(null); // ye pop mai jo close button hai uskp click krne kr liye
@@ -177,6 +177,8 @@ export default function Home() {
 
     return (
         <>
+            <Navbar />
+
             {/* <!-- Button trigger modal --> */}
             <button type="button" /*style={{ display: "none" }}*/ className="btn btn-primary" /*ref={ref}*/ data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Create Repository

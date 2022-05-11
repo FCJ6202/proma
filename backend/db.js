@@ -6,6 +6,17 @@ const Key = process.env.REACT_APP_USER_PASS;
 
 
 
+// const connectToDatabase = () =>{
+//     mongoose.connect(mongoUrl,{
+//         //useNewUrlParser : true,
+//         //useUnifiedTopology : true
+//     },() =>{
+//         console.log("database connected successfully");
+//         //console.log(mongoUrl)
+//         //console.log(Key)
+//     })
+// }
+
 const connectToDatabase = () =>{
     mongoose.connect(mongoUrl,{
         useNewUrlParser : true,

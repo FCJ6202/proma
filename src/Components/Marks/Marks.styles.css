@@ -1,0 +1,104 @@
+.page-wrap
+{
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.status-bar
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.item-wrap
+{
+    width: 50%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+.status-bar-item
+{
+    padding: 10px;
+
+}
+.big-preview
+{
+    text-align: center;
+    font-size: 30px;
+    font-weight: 300;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+.subtite
+{
+    color: rgba(0, 0, 0, 0.197);
+}
+.line
+{
+    margin-left: 5px;
+    margin-right:5px;
+    color: brown;
+    width: 5px;
+    
+}
+.student-list
+{
+    margin-left: 0;
+    margin-right: auto;
+    width: 100%;
+}
+.panel-body
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.list-group{
+    max-height: 600px;
+    width: 70%;
+    /* min-width: 200px; */
+    margin-bottom: 10px;
+    /* overflow:scroll; */
+    overflow-y:auto;
+    -webkit-overflow-scrolling: touch;
+
+}
+
+.item
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}.panel
+{
+    width: 100%;
+}
+.btn
+{
+    border: none;
+    background-color: bisque;
+}
+.btn:hover
+{
+    background-color: rgba(39, 91, 91, 0.355);
+}
+.item-name-wrap
+{
+    width: 75px;
+    /* background-color: bisque; */
+}
+.item-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    display: block;
+    line-height: 1em; /* a */
+    max-height: 1em; /* a x number of line to show (ex : 2 line)  */
+  }
+  
+.marks-wrap
+  {
+      width:270px
+  }

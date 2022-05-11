@@ -55,7 +55,7 @@ const People = () =>
     const HandleSearch =  (e) => {
         console.log(e)
         PeopleData.Students.map((student)=>{
-            if(student.name===SearchName)
+            if(student.email===SearchName)
             {
                  setFoundName(true)
                 //  console.log(FoundName)
@@ -170,7 +170,7 @@ const People = () =>
                         </div>
                         <div className="modal-body">
                             <div className="mb-3">
-                                <label htmlFor="exampleInputRepo" className="form-label">Search Name</label>
+                                <label htmlFor="exampleInputRepo" className="form-label">Search Email</label>
                                 <input type="text" className="form-control" required value={SearchName} onChange={HandleSearchName} id="SearchName" />
                             </div>
                             <button type="submit" className="btn btn-primary" onClick={HandleSearch} >Search</button>

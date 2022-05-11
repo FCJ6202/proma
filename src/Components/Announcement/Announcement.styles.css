@@ -34,5 +34,6 @@
   }
   .announcement__content {
     margin-top: 15px;
+    word-wrap: break-word;
   }
   
