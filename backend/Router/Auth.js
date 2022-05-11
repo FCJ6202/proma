@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const user = require('../Modals/User');
+const repo = require('../Modals/Repo');
 const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
 const fetchData = require('../middleware/fetchData');
@@ -94,6 +95,93 @@ router.post('/userdata', fetchData, async (req, res) => {
       const id = req.UserData.id;
       const userData = await user.findById(id).select("-password");
       res.json(userData);
+    } catch (error) {
+      console.log(error)
+      res.json({error: error.message });
+    }
+  })
+
+
+  router.post('/userdata/:UserId', fetchData, async (req, res) => {
+    try {
+      const id = req.params.UserId;
+      const userData = await user.findById(id).select("-password");
+      res.json(userData);
+    } catch (error) {
+      console.log(error)
+      res.json({error: error.message });
+    }
+  })
+
+
+  router.post('/:RepoId/usercheck', fetchData, async (req, res) => {
+    try {
+      const repoId = req.params.RepoId;
+      const userId = req.UserData.id;
+      //const userData = await user.findById(userId).select("-password");
+      const repoData = await repo.findById(repoId);
+
+      var check = false;
+      repoData.Admin.map((data) => {
+        if(data == userId){
+          check = true;
+        }
+      })
+      res.json(check);
+    } catch (error) {
+      console.log(error)
+      res.json({error: error.message });
+    }
+  })
+
+  router.post('/:RepoId/userpromote/:UserId', fetchData, async (req, res) => {
+    try {
+      const UrlUserid = req.params.UserId;
+      const repoId = req.params.RepoId;
+      const userId = req.UserData.id;
+      //const userData = await user.findById(userId).select("-password");
+      const repoData = await repo.findById(repoId);
+
+      var check = false;
+      repoData.Admin.map((data) => {
+        if(data == userId){
+          check = true;
+        }
+      })
+
+      //console.log(repoData)
+
+      if(check){
+        var check1 = false;
+        repoData.Admin.map((data) => {
+          if(data == userId){
+            check1 = true;
+          }
+        })
+        if(check1){
+          return res.status(404).json({success : false,error : "This user is also a admin"})
+        }
+        repoData.Admin.push(UrlUserid);
+        var i = 0;
+        //res.json(repoData.Member)
+        var arr = repoData.Member;
+        arr.map((data) => {
+          if(data == UrlUserid){
+            arr.splice(i,1);
+          }
+          i++;
+        })
+        repoData.Member = arr;
+        //console.log(repoData)
+        repo.findByIdAndUpdate(repoId,repoData,(err,docs) => {
+          if(err){
+            return res.status(404).json({success : false,error : "Not Promated! try again"})
+          }
+        })
+      }else{
+        return res.status(404).json({success : false,error : "You are not a admin"})
+      }
+      res.json(check);
     } catch (error) {
       console.log(error)
       res.json({error: error.message });

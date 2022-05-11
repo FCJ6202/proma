@@ -10,7 +10,7 @@ const Announcement =({id,...props}) => {
 
     return (
      
-       (props.type==="announcement")?
+       (props.Type==="announcement")?
       <div className="announcement">
           <div className="announcement__informationContainer">
             <div className="announcement__infoSection">
@@ -21,8 +21,8 @@ const Announcement =({id,...props}) => {
                 
                   </div>
                   <div className="announcement__nameAndDate">
-                        <div className="announcement__name">{props.creatorName}</div>
-                        <div className="announcement__date">{props.creationTime}</div>
+                        <div className="announcement__name">{props.CreaterName}</div>
+                        <div className="announcement__date">{props.CreationTime}</div>
                   </div>
             </div>
         
