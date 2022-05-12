@@ -71,13 +71,6 @@ const Marks = () => {
     const [Handed, setHanded] = useState(0);
     const [Marked, setMarked] = useState(0);
     const [FormSubmitted, SetFormSubmitted] = useState(false);
-    // const [Student, SetStudent] = useState({
-    //     "id": "",
-    //     "name": "",
-    //     "submitted": "false",
-    //     "submission-link": "null",
-    //     "marks": "null",
-    // })
     const HandleChange = (e) => {
         console.log(e);
         setMarks(e.target.value);
@@ -96,32 +89,35 @@ const Marks = () => {
         setMarks("null");
     }
 
-    // function usePrevious(value) {
-    //     const ref = useRef();
-    //     useEffect(() => {
-    //       ref.current = value;
-    //     });
-    //     return ref.current;
-    //   }
-    // const prevArray=usePrevious(StudentDetailsArray)
+    function usePrevious(value) {
+        const ref = useRef();
+        useEffect(() => {
+          ref.current = value;
+        });
+        return ref.current;
+      }
+    
+    const prevArray=usePrevious(StudentDetailsArray)
+    
     useEffect(() => {
-        // console.log(prevArray)
-        StudentDetailsArray?.map((Student) => {
-            // && prevArray[parseInt(Student.id)-1].marks==="null"
-            if (Student.marks !== "null" ) {
                 setMarked(Marked => Marked + 1);
-            }
+    }, [StudentDetailsArray])
+   
+    useEffect(() => {
+        StudentDetailsArray?.map((Student) => {
             let submittedv=(Student.submitted);
             let BoolSubmitted=(submittedv==="false")?false:true;
-            // console.log(prevArray)
-            // let prevsubmittedv=(prevArray[parseInt(Student.id)-1].submitted);
-            // let prevBoolSubmitted=(prevsubmittedv==="false")?false:true;
-            // && !prevBoolSubmitted
             if (BoolSubmitted ) {
                 setHanded(Handed => Handed + 1);
             }
+            if (Student.marks !== "null" ) {
+                setMarked(Marked => Marked + 1);
+            }
+
         })
-    }, [StudentDetailsArray])
+    }, [])
+
+
 
     const getIfSubmitted= (str) =>
     {
