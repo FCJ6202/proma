@@ -238,7 +238,7 @@ const Classwork = () =>
 
                     (StreamAnnouncementArray)?.slice(0).reverse().map(({ _id, ...otherProps }) => {
                         return (
-                         <Announcement key={_id} id={_id} view="teacher" {...otherProps} />
+                         <Announcement key={_id} id={_id} view="student" {...otherProps} />
                         )
                               
                     }

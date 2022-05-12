@@ -1,14 +1,39 @@
 import React from 'react'
 import {Link } from "react-router-dom";
+import {useState,useEffect} from 'react'
 import "./class-navbar.styles.css"
 
 export default function ClassNavbar(props) {
     const classId=props.classId;
+    var [ClassName, setClassName] = useState("")
+    const RepoDataById = async (RepoId) => {
+        const authToken = localStorage.getItem("token");
+        //console.log("Add" + authToken);
+        const url = `http://localhost:4000/u/repo/Repodata/${RepoId}`;
+        const response = await fetch(url, {
+          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            'Content-Type': 'application/json',
+            'auth-token': authToken,
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          //body: JSON.stringify({ repoName, createrName}) // body data type must match "Content-Type" header
+        });
+        const json = await response.json();
+
+        return json.repoName;
+    }
+
+    useEffect( async () => {
+        ClassName = await RepoDataById(classId)
+        setClassName(ClassName)
+    }, [])
+    
     return (
         <>
             <nav  className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
-                    <a className="me1 navbar-brand" href="#" style={{marginRight : "400px",marginBottom : "10px",marginTop : "10px",borderRadius : "20px"}}><h3>ClassName</h3></a>
+                    <a className="me1 navbar-brand" href="#" style={{marginRight : "400px",marginBottom : "10px",marginTop : "10px",borderRadius : "20px"}}><h3>{ClassName}</h3></a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                           <span className="navbar-toggler-icon"></span>
                     </button>

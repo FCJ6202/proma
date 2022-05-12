@@ -4,9 +4,9 @@ import image from "../../images/profile_pic.png"
 import { Link } from 'react-router-dom'
 
 const Announcement =({id,...props}) => {
-  console.log(props.type)
-  
-  const newTo = (props.view==="student")?{ pathname: `/class/${props.courseId}/stream/${id}/assignment`}:{ pathname: `/class/${props.courseId}/classwork/${id}`};
+  console.log(props)
+  //const classId = window.document.URL.slice(28,52);
+  const newTo = (props.view==="student")?{ pathname: `/class/${props.RepoId}/stream/${id}/assignment`}:{ pathname: `/class/${props.RepoId}/classwork/${id}`};
 
     return (
      
@@ -41,8 +41,8 @@ const Announcement =({id,...props}) => {
                 
                   </div>
                   <div className="announcement__nameAndDate">
-                        <div className="announcement__name">{props.creatorName} created an assignment</div>
-                        <div className="announcement__date">{props.creationTime}</div>
+                        <div className="announcement__name">{props.CreaterName} {props.title}</div>
+                        <div className="announcement__date">{props.CreationTime}</div>
                   </div>
             </div>
         

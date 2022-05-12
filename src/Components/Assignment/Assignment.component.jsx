@@ -6,10 +6,46 @@ import axios from 'axios';
 
 const Assignment = ( ) =>
 {
+    const [IsTeacher,setIsTeacher]=useState(true);
     const repoId = window.document.URL.slice(28,52);
+    const assignId = (IsTeacher == true)?window.document.URL.slice(63,87):window.document.URL.slice(60,84);
+    console.log(assignId + " <-addignid")
+
+
+    var [AssignmentArray,SetAssignmentArray]=useState([]);
+    var [CurrentAssignment,setCurrentAssignment]=useState({});
+
+    const FetchAssignData = async () => {
+        const authToken = localStorage.getItem("token");
+        //console.log("Add" + authToken);
+        const url = `http://localhost:4000/u/assign/fetchdata/${repoId}`;
+        const response = await fetch(url, {
+          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            'Content-Type': 'application/json',
+            'auth-token': authToken,
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          //body: JSON.stringify({ Type, text}) // body data type must match "Content-Type" header
+        });
+        const json = await response.json();
+        AssignmentArray = json;
+        SetAssignmentArray(AssignmentArray);
+    }
+
+    const ForCurrentAssignment = async () => {
+        await FetchAssignData();
+        AssignmentArray.map((data)=> {
+            if(data._id == assignId){
+                CurrentAssignment = data;
+            }
+        })
+
+        setCurrentAssignment(CurrentAssignment);
+    }
 
     console.log("isteacher in this file");
-    const [IsTeacher,setIsTeacher]=useState(true); // update using useeffect and 
+    //const [IsTeacher,setIsTeacher]=useState(true); // update using useeffect and 
     const DetermineBool = async () => {
         const authToken = localStorage.getItem("token");
         //console.log("Add" + authToken);
@@ -81,8 +117,6 @@ const Assignment = ( ) =>
               },
 
             ]
-            const [AssignmentArray,SetAssignmentArray]=useState([]);
-            const [CurrentAssignment,setCurrentAssignment]=useState({});
             const [CurrentTime,setTime]=useState({});
             const [AssignmentStatus,SetAssignmentStatus]=useState("");
             const [selectedFile, setSelectedFile] = React.useState(null);
@@ -126,27 +160,20 @@ const Assignment = ( ) =>
                 setSelectedFile(event.target.files[0])
               }
             
-            useEffect(()=>{
-                console.log(AssignmentArrayData)
-                console.log("pwjepf")
-                SetAssignmentArray(AssignmentArrayData)
-                console.log(AssignmentArray)
-            },[]);
+            // useEffect(()=>{
+            //     console.log(AssignmentArrayData)
+            //     console.log("pwjepf")
+            //     SetAssignmentArray(AssignmentArrayData)
+            //     console.log(AssignmentArray)
+            // },[]);
 
 
-            useEffect(() => {
-                console.log("fires use effect")
-                console.log(AssignmentArray)
-                    AssignmentArray.map( (data) => {
-                        console.log(`${data.id} helo`)
-                        if(data.id===postId)
-                        {
-                            setCurrentAssignment(data);
-                            console.log("habla")
-                            console.log(data)
-                        }
-                    })
-              },[postId,AssignmentArray]);
+            useEffect(async () => {
+                //console.log("fires use effect")
+                //console.log(AssignmentArray)
+                await ForCurrentAssignment();
+                console.log(CurrentAssignment)
+              },[]);
 
 
               useEffect(() => {
@@ -220,7 +247,7 @@ const Assignment = ( ) =>
                     </div>
                 </div>
                 <div className="information-container">
-                    <div className="creator-and-date">{`${CurrentAssignment.creatorName} | ${CurrentAssignment.updateTime}`}</div>
+                    <div className="creator-and-date">{`${CurrentAssignment.CreaterName} | ${CurrentAssignment.UpdationTime}`}</div>
                     <div className="points-and-due">
                         <div className="points">{`${CurrentAssignment.points} points`}</div>
                         <div className="due">{`Due ${CurrentAssignment.dueDate} ${parseInt(CurrentAssignment.dueTime / 60)}:${CurrentAssignment.dueTime % 60} hours`}</div>
@@ -230,8 +257,9 @@ const Assignment = ( ) =>
                 <hr className="line"></hr>
                 <div className="assignment-text">{CurrentAssignment.text}</div>
                 <div className="assignment-material">
-                    {CurrentAssignment.materials?.map((material) => {return (<><a href={`${material.link}`} target = "_blank" 
-rel = "noopener noreferrer"> {`${material.name}`}</a><br></br></>)})}
+                    {/* <a href={`${CurrentAssignment.materials[0].link}`} target = "_blank" rel = "noopener noreferrer"> {`${CurrentAssignment.materials[0].name}`}</a> */}
+                    {/* {CurrentAssignment.materials?.map((material) => {return (<><a href={`${material.link}`} target = "_blank" 
+rel = "noopener noreferrer"> {`${material.name}`}</a><br></br></>)})} */}
                 </div>
 
             <hr className="line"></hr>
