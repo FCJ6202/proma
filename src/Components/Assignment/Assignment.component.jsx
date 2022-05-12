@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const Assignment = ( ) =>
 {
-    const [IsTeacher,setIsTeacher]=useState(true);
+    const [IsTeacher,setIsTeacher]=useState((window.document.URL.includes("stream"))?false:true);
     const repoId = window.document.URL.slice(28,52);
     const assignId = (IsTeacher == true)?window.document.URL.slice(63,87):window.document.URL.slice(60,84);
     console.log(assignId + " <-addignid")
@@ -65,7 +65,7 @@ const Assignment = ( ) =>
     }
     useEffect( async ()=>{
         await DetermineBool(); 
-    },[])
+    },[IsTeacher])
 
     const params= useParams();
     const postId=params.postId;

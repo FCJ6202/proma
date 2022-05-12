@@ -139,6 +139,7 @@ const Classwork = () =>
         const json = await response.json();
         StreamAnnouncementArray = json;
         setStreamAnnouncementArray(StreamAnnouncementArray);
+        //window.location.reload();
       }
 
     const HandleSubmit = async() => { // this is for adding new repo by the user
@@ -158,6 +159,7 @@ const Classwork = () =>
             Materials: [], 
             })
         close.current.click();
+        window.location.reload();
     }
 
     useEffect(async () => {
