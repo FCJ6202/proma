@@ -180,7 +180,7 @@ export default function Home() {
             <Navbar />
 
             {/* <!-- Button trigger modal --> */}
-            <button type="button" /*style={{ display: "none" }}*/ className="btn btn-primary" /*ref={ref}*/ data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" style={{ color: "black" }} className="btn btn-primary" /*ref={ref}*/ data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Create Repository
             </button>
 
@@ -211,7 +211,7 @@ export default function Home() {
             </div>
 
             {/* <!-- Button trigger modal --> */}
-            <button type="button" /*style={{ display: "none" }}*/ className="btn btn-primary" /*ref={ref}*/ data-bs-toggle="modal" data-bs-target="#exampleModal2">
+            <button type="button" style={{ color: "black" }} className="btn btn-primary" /*ref={ref}*/ data-bs-toggle="modal" data-bs-target="#exampleModal2">
                 Join Repository
             </button>
 

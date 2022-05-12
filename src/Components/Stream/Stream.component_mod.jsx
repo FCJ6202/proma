@@ -168,22 +168,6 @@ const Stream = () => {
   var [ClassPosts, SetClassPosts] = useState([]);
   //const [CreateAnnouce,setCurrentClassInfo] = useState([])
 
-
-
-  // useEffect(() => {
-  //   const arr = []
-  //   const getClassPosts = () => {
-  //     ClassPosts.map((data) => {
-  //       if (data.courseId === classId) {
-  //         arr.push(data);
-  //       }
-  //     })
-  //   }
-  //   getClassPosts();
-  //   updateCurrentClassPosts(arr);
-  //   console.log(ClassPosts)
-  //    console.log(CurrentClassPosts);
-  // }, [ClassPosts]);
   const FetchAnnouceData = async () => {
     const authToken = localStorage.getItem("token");
     //console.log("Add" + authToken);
@@ -197,7 +181,8 @@ const Stream = () => {
       },
       //body: JSON.stringify({ Type, text}) // body data type must match "Content-Type" header
     });
-    const json = await response.json();
+    var json = await response.json();
+    json = json.reverse();
     ClassPosts = json;
     SetClassPosts(ClassPosts);
   }
